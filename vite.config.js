@@ -10,5 +10,6 @@ export default defineConfig({
   },
   server: {
     open: true, // Ouvre automatiquement le navigateur au démarrage du serveur
+    port: 3001,
   },
 });

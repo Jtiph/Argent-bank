@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require('dotenv').config(); 
 const databaseUrl =
   process.env.DATABASE_URL || 'mongodb://localhost/argentBankDB'
 
