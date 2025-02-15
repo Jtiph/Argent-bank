@@ -7,6 +7,7 @@ import "./index.css";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Profile from "./pages/Profile/profile";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>
