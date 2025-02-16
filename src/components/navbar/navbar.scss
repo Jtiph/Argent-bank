@@ -8,15 +8,27 @@
 .main-nav a {
   font-weight: bold;
   color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .main-nav a.router-link-exact-active {
   color: #42b983;
 }
-
+.main-nav-items {
+  display: flex;
+}
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  border: none;
+  background: none;
+  font-weight: bold;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .main-nav-item:hover {

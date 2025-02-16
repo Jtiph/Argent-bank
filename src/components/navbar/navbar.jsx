@@ -39,14 +39,14 @@ const Navbar = () => {
       </Link>
       <div>
         {token && user ? (
-          <>
+          <div className="main-nav-items">
             <Link className="main-nav-item" to="/profile">
               <FaCircleUser className="main-nav-item-logo" /> {user.firstName}
             </Link>
             <button className="main-nav-item" onClick={handleLogout}>
               <FaSignOutAlt /> Sign Out
             </button>
-          </>
+          </div>
         ) : (
           <Link className="main-nav-item" to="/signin">
             <FaCircleUser /> Sign In
