@@ -19,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(autoFetchUserProfile()); // Charge le profil automatiquement si un token est présent
-  }, [dispatch]); // S'exécute uniquement au chargement du composant
+  }, [dispatch, user]); // S'exécute uniquement au chargement du composant
 
   const handleLogout = () => {
     dispatch(logout());
@@ -41,7 +41,7 @@ const Navbar = () => {
         {token && user ? (
           <div className="main-nav-items">
             <Link className="main-nav-item" to="/profile">
-              <FaCircleUser className="main-nav-item-logo" /> {user.firstName}
+              <FaCircleUser className="main-nav-item-logo" /> {user.userName}
             </Link>
             <button className="main-nav-item" onClick={handleLogout}>
               <FaSignOutAlt /> Sign Out

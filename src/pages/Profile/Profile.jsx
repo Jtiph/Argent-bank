@@ -11,33 +11,65 @@ const Profile = () => {
   const [newUsername, setNewUsername] = useState(user?.userName || "");
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (newUsername.trim() === "" || newUsername === user?.userName) return;
-    dispatch(updateUserProfile({ token, newUsername }));
-    setIsEditing(false);
-  };
 
+    try {
+      const resultAction = await dispatch(
+        updateUserProfile({ token, newUsername })
+      );
+
+      if (updateUserProfile.fulfilled.match(resultAction)) {
+        setIsEditing(false);
+      } else {
+        console.error(" Erreur lors de la mise à jour :", resultAction.payload);
+      }
+    } catch (error) {
+      console.error(" Erreur inattendue :", error);
+    }
+  };
+  //  Fonction pour détecter "Entrée" et sauvegarder
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Évite le rafraîchissement de la page
+      handleSave();
+    }
+  };
   return (
     <main className="main bg-dark">
       <div className="header">
         {isEditing ? (
           <div className="edit-container">
-            <input
-              type="text"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-              placeholder="Enter new username"
-              className="edit-input"
-            />
-            <button className="save-button" onClick={handleSave}>
-              Save
-            </button>
-            <button
-              className="cancel-button"
-              onClick={() => setIsEditing(false)}
-            >
-              Cancel
-            </button>
+            <div className="input-group">
+              <label>User name:</label>
+              <input
+                type="text"
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+                onKeyDown={handleKeyDown} // Appelle la fonction pour détecter "Entrée"
+                placeholder="Enter new username"
+                className="edit-input"
+              />
+            </div>
+            <div className="input-group">
+              <label>First Name:</label>
+              <input type="text" value={user?.firstName} disabled />
+            </div>
+            <div className="input-group">
+              <label>Last Name:</label>
+              <input type="text" value={user?.lastName} disabled />
+            </div>
+            <div className="button-group">
+              <button className="save-button" onClick={handleSave}>
+                Save
+              </button>
+              <button
+                className="cancel-button"
+                onClick={() => setIsEditing(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           <>

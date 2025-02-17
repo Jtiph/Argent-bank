@@ -40,6 +40,7 @@ export const updateUserProfile = createAsyncThunk(
       if (!response.ok) throw new Error(data.message);
       return data.body; // Retourne les nouvelles infos utilisateur
     } catch (error) {
+      console.error("Erreur API:", error.message);
       return rejectWithValue(error.message);
     }
   }
